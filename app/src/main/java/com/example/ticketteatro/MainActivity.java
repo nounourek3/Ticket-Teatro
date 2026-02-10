@@ -1,12 +1,17 @@
 package com.example.ticketteatro;
 
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.ticketteatro.database.DBHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,5 +25,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //--------DATABASE-------
+        try {
+            DBHelper dbHelper = new DBHelper(this);
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Database error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
     }
 }
