@@ -1,8 +1,10 @@
 package com.example.ticketteatro;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +14,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.ticketteatro.database.DBHelper;
+import com.example.ticketteatro.database.DBTestActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Button btnOpenDBTest = findViewById(R.id.btnOpenDBTest);
+        btnOpenDBTest.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DBTestActivity.class);
+            startActivity(intent);
+        });
 
         //--------DATABASE-------
         try {
@@ -36,4 +44,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 }

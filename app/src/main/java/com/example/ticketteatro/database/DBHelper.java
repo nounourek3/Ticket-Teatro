@@ -1,5 +1,6 @@
 package com.example.ticketteatro.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -94,6 +95,16 @@ public class DBHelper extends SQLiteOpenHelper{
         db.execSQL("DROP TABLE IF EXISTS cartelera");
         db.execSQL("DROP TABLE IF EXISTS usuarios");
         onCreate(db);
+    }
+    public long insertUsuario(String nombre, String apellido, String email, String telefono, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("nombre", nombre);
+        cv.put("apellido", apellido);
+        cv.put("email", email);
+        cv.put("telefono", telefono);
+        cv.put("password", password);
+        return db.insert("usuarios", null, cv); // returns the new row ID, or -1 if error
     }
 
 }
